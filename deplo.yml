@@ -1,0 +1,25 @@
+                                                                
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: insta
+  template:
+    metadata:
+      labels:
+        app: insta
+    spec:
+      containers:
+      - name: nginxcont
+        image: nginx
+        ports:
+        - containerPort: 80
+        livenessProbe: #
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
